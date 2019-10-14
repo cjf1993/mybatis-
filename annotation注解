@@ -1,0 +1,45 @@
+1.arg
+
+@Documented
+@Retention(RetentionPolicy.RUNTIME)
+@Target({})
+public @interface Arg {
+    boolean id() default false;
+
+    String column() default "";
+
+    Class<?> javaType() default void.class;
+
+    JdbcType jdbcType() default JdbcType.UNDEFINED;
+
+    Class<? extends TypeHandler> typeHandler() default UnknownTypeHandler.class;
+
+    String select() default "";
+
+    String resultMap() default "";
+
+    String name() default "";
+}
+
+2.CacheNamespace
+
+@Documented
+@Retention(RetentionPolicy.RUNTIME)
+@Target({ElementType.TYPE})
+public @interface CacheNamespace {
+    Class<? extends Cache> implementation() default PerpetualCache.class;
+
+    Class<? extends Cache> eviction() default LruCache.class;
+
+    long flushInterval() default 0L;
+
+    int size() default 1024;
+
+    boolean readWrite() default true;
+
+    boolean blocking() default false;
+
+    Property[] properties() default {};
+}
+
+
